@@ -4,10 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
+var session = require('cookie-session');
+var passport = require('passport');
+var connect = require('connect');
 var app = express();
-var routes = require('./lib/routes')(app);
 var auth = require('./lib/auth.js');
 
 
@@ -26,7 +26,21 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
+app.use(session({
+    keys: ['secretkey1', 'secretkey2', '...']
+}));
+
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+
+// Configure passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+var routes = require('./lib/routes')(app);
 
 
 // catch 404 and forward to error handler

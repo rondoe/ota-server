@@ -1,4 +1,22 @@
-extends layout
-
-block content
-  h1 login
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/bower_components/animate.css/animate.min.css')
+        link(rel='stylesheet', href='/stylesheets/theme.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body.login
+        .container
+            .row
+                .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-8.col-xs-offset-2
+                    .login_form
+                        .login_content
+                            form(method="post", action="/login")
+                                h1 Login Form
+                                div
+                                    input(type="text", class="form-control", placeholder="Username", name="username")
+                                div
+                                    input(type="password", class="form-control", placeholder="Password", name="password")
+                                div
+                                    button(class="btn btn-default submit", type="submit") Login In
