@@ -1,7 +1,64 @@
 doctype html
-html
+html(ng-app="otaServerApp")
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bower_components/animate.css/animate.min.css')
+    link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.css')
+    link(rel='stylesheet', href='/bower_components/gentelella/build/css/custom.min.css')
+  body(class="{{bodyClass}}", ng-controller="NavigationCtrl as vm")
+    .container.body
+      .main_container
+        .col-md-3.left_col
+          .left_col.scroll-view
+            .navbar.nav_title
+              a.site_title(href='/')
+                i.fa.fa-wifi
+                span=" OTA SERVER"
+            .clearfix
+            .profile
+            br
+            #sidebar-menu.main_menu_side.main_menu
+              .menu_section.active
+                h3 Menu
+                ul.nav.side-menu
+                  li.active
+                    a
+                      i.fa.fa-home
+                      ="Home"
+                  li
+                    a
+                      i.fa.fa-eercast
+                      ="Devices"
+                  li
+                    a
+                      i.fa.fa-user
+                      ="Profile"
+                  li
+                    a(href="/logout")
+                      i.fa.fa-sign-out
+                      ="Signout"
+        .top_nav
+          .nav_menu
+            nav(role="navigation")
+              .nav.toggle
+                a#menu_toggle(ng-href="", ng-click="vm.sidebar=!vm.sidebar")
+                  i.fa.fa-bars
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a
+                    i.fa.fa-envelope
+        .right_col(style="min-height: 2000px;")
+          block content
+            div(ng-view="")
+
+    script(src="/bower_components/angular/angular.min.js")
+    script(src="/bower_components/angular-animate/angular-animate.min.js")
+    script(src="/bower_components/angular-cookies/angular-cookies.min.js")
+    script(src="/bower_components/angular-messages/angular-messages.min.js")
+    script(src="/bower_components/angular-route/angular-route.min.js")
+    script(src="/bower_components/angular-sanitize/angular-sanitize.min.js")
+    script(src="/bower_components/angular-touch/angular-touch.min.js")
+    script(src="scripts/app.js")
+    script(src="scripts/controllers/main.js")
+    script(src="scripts/controllers/about.js")
