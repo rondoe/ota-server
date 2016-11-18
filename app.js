@@ -4,11 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('cookie-session');
+var session = require('express-session');
 var passport = require('passport');
 var connect = require('connect');
-var app = express();
 var auth = require('./lib/auth.js');
+var app = express();
 
 
 /// DATABASE
@@ -27,19 +27,15 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(session({
-  keys: ['secretkey1', 'secretkey2', '...']
+  secret: 'keyboard cat'
 }));
 
-
-app.use(express.static(path.join(__dirname, 'app')));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
-
-// Configure passport middleware
+// use passport session
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
+app.use(express.static(path.join(__dirname, 'app')));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 var routes = require('./lib/routes')(app);
 
 

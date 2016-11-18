@@ -17,4 +17,4 @@ angular.module('otaServerApp')
       $rootScope.bodyClass = vm.sidebar ? "nav-md" : "nav-sm";
     });
   })
-  .controller('IndexCtrl', function() {});
+  .controller('MainCtrl', function() {});
