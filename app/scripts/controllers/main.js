@@ -8,7 +8,7 @@
  * Controller of the otaServerApp
  */
 angular.module('otaServerApp')
-  .controller('NavigationCtrl', function($rootScope, $scope) {
+  .controller('NavigationCtrl', function($rootScope, $scope, DeviceService) {
     var vm = this;
     vm.sidebar = true;
     $rootScope.bodyClass = "nav-md";
@@ -16,5 +16,18 @@ angular.module('otaServerApp')
     $scope.$watch("vm.sidebar", function() {
       $rootScope.bodyClass = vm.sidebar ? "nav-md" : "nav-sm";
     });
+
+
+    DeviceService.my().success(function(res) {
+      $rootScope.deviceCount = res.length;
+    });
+
+
   })
-  .controller('MainCtrl', function() {});
+  .controller('MainCtrl', function(DeviceService) {
+
+    var vm = this;
+
+
+
+  });

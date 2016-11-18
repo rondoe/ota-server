@@ -6,6 +6,7 @@ html(ng-app="otaServerApp")
     link(rel='stylesheet', href='/bower_components/animate.css/animate.min.css')
     link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.css')
     link(rel='stylesheet', href='/bower_components/gentelella/build/css/custom.min.css')
+    link(rel='stylesheet', href='/styles/main.css')
   body(class="{{bodyClass}}", ng-controller="NavigationCtrl as vm")
     .container.body
       .main_container
@@ -30,6 +31,7 @@ html(ng-app="otaServerApp")
                     a
                       i.fa.fa-eercast
                       ="Devices"
+                      span.badge.pull-right {{deviceCount}}
                   li
                     a
                       i.fa.fa-user
@@ -62,3 +64,4 @@ html(ng-app="otaServerApp")
     script(src="scripts/app.js")
     script(src="scripts/controllers/main.js")
     script(src="scripts/controllers/about.js")
+    script(src="scripts/services/device.js")
