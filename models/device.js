@@ -24,6 +24,10 @@ var Device = new Schema({
     chip: Number,
     free: Number
   },
+  created: {
+    type: Date,
+    default: new Date()
+  },
   versions: [{
     version: String,
     software: Schema.Types.ObjectId,

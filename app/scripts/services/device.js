@@ -14,4 +14,8 @@ angular.module('otaServerApp')
     this.my = function() {
       return $http.get("/me/devices");
     }
+
+    this.all = function() {
+      return $http.get("/devices");
+    }
   });

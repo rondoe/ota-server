@@ -27,8 +27,13 @@ html(ng-app="otaServerApp")
                     a
                       i.fa.fa-home
                       ="Home"
-                  li
-                    a
+                  li(ng-show="!user.admin")
+                    a(href="#/devices")
+                      i.fa.fa-eercast
+                      ="Devices"
+                      span.badge.pull-right {{deviceCount}}
+                  li(ng-show="user.admin")
+                    a(href="#/admin/devices")
                       i.fa.fa-eercast
                       ="Devices"
                       span.badge.pull-right {{deviceCount}}
@@ -64,4 +69,6 @@ html(ng-app="otaServerApp")
     script(src="scripts/app.js")
     script(src="scripts/controllers/main.js")
     script(src="scripts/controllers/about.js")
+    script(src="scripts/controllers/device.js")
     script(src="scripts/services/device.js")
+    script(src="scripts/services/user.js")

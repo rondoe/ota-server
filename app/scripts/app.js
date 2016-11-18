@@ -30,6 +30,26 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/admin/devices', {
+        templateUrl: 'views/admin/devices/index.html',
+        controller: 'DeviceCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          devices: function(DeviceService) {
+            return DeviceService.all();
+          }
+        }
+      })
+      .when('/devices', {
+        templateUrl: 'views/devices/index.html',
+        controller: 'DeviceCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          devices: function(DeviceService) {
+            return DeviceService.my();
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

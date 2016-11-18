@@ -33,9 +33,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+var routes = require('./lib/routes')(app);
 app.use(express.static(path.join(__dirname, 'app')));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
-var routes = require('./lib/routes')(app);
 
 
 // catch 404 and forward to error handler

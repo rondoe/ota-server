@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Devices
+          <small>unassociated</small>
+        </h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <table class="table table-striped">
+          <thead>
+
+            <tr class="headings">
+              <td>
+                STA
+              </td>
+              <td>
+                Created
+              </td>
+              <td>
+                Owner
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="device in vm.devices">
+              <td>
+                {{device.sta}}
+              </td>
+              <td>
+                {{device.created}}
+              </td>
+              <td>
+                <span ng-if="!device.user" class="text-muted">Unknown</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
