@@ -15,7 +15,8 @@ angular
     'ngMessages',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angularMoment'
   ])
   .config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;
@@ -37,6 +38,16 @@ angular
         resolve: {
           devices: function(DeviceService) {
             return DeviceService.all();
+          }
+        }
+      })
+      .when('/devices/:id/edit', {
+        templateUrl: 'views/devices/edit.html',
+        controller: 'EditDeviceCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          device: function(DeviceService, $route) {
+            return DeviceService.get($route.current.params.id);
           }
         }
       })

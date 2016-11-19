@@ -19,6 +19,12 @@
                 Created
               </td>
               <td>
+                Checked
+              </td>
+              <td>
+                SDK
+              </td>
+              <td>
                 Owner
               </td>
             </tr>
@@ -29,10 +35,22 @@
                 {{device.sta}}
               </td>
               <td>
-                {{device.created}}
+                <span am-time-ago="device.created"></span>
+                <span ng-show="{{device.created | amDifference: null :'days'}} ===0" class="label label-warning">New</span>
+              </td>
+              <td>
+                <span am-time-ago="device.lastCheck"></span>
+              </td>
+              <td>
+                {{device.sdk}}
               </td>
               <td>
                 <span ng-if="!device.user" class="text-muted">Unknown</span>
+                <span>{{device.user.username}}</span>
+              </td>
+              <td>
+                <a href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
+
               </td>
             </tr>
 

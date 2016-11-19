@@ -1,5 +1,8 @@
+var Moniker = require('moniker');
+var uid = require('uid');
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
+
 //instantiate mongoose-gridfs
 var gridfs = require('mongoose-gridfs')({
   collection: 'software',
@@ -11,6 +14,9 @@ var Software = gridfs.model;
 
 var Device = new Schema({
   name: String,
+  // logical identifier and secret
+  deviceId: String,
+  secret: String,
   sta: String, // sta-mac
   ap: String, // ap-mac
   sdk: String,
@@ -28,6 +34,7 @@ var Device = new Schema({
     type: Date,
     default: new Date()
   },
+  lastCheck: Date,
   versions: [{
     version: String,
     software: Schema.Types.ObjectId,
@@ -50,5 +57,17 @@ Device.statics.byUser = function(id, callback) {
   }, callback);
 };
 
+Device.pre('save', function(next) {
+
+  if (!this.deviceId) {
+    this.deviceId = Moniker.choose();
+  }
+  if (!this.secret) {
+    this.secret = uid(32);
+  }
+
+  // do stuff
+  next();
+});
 
 module.exports = mongoose.model('Device', Device);

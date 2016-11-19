@@ -4,15 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+/// DATABASE
+var db = require('./lib/db');
+
 var session = require('express-session');
 var passport = require('passport');
-var connect = require('connect');
 var auth = require('./lib/auth.js');
+var connect = require('connect');
 var app = express();
 
 
-/// DATABASE
-var db = require('./lib/db');
 
 // view engine setup
 app.set('view engine', 'jade');
