@@ -31,12 +31,12 @@ html(ng-app="otaServerApp")
                     a(href="#/devices")
                       i.fa.fa-eercast
                       ="Devices"
-                      span.badge.pull-right {{deviceCount}}
+                      span.badge.pull-right(ng-if="deviceCount") {{deviceCount}}
                   li(ng-show="user.admin")
                     a(href="#/admin/devices")
                       i.fa.fa-eercast
                       ="Devices"
-                      span.badge.pull-right {{deviceCount}}
+                      span.badge.pull-right(ng-if="deviceCount") {{deviceCount}}
                   li
                     a
                       i.fa.fa-user
@@ -69,6 +69,8 @@ html(ng-app="otaServerApp")
     script(src="/bower_components/moment/moment.js")
     script(src="/bower_components/moment/locale/de.js")
     script(src="/bower_components/angular-moment/angular-moment.min.js")
+    script(src="/bower_components/clipboard/dist/clipboard.min.js")
+    script(src="/bower_components/ngclipboard/dist/ngclipboard.min.js")
     script(src="scripts/app.js")
     script(src="scripts/controllers/main.js")
     script(src="scripts/controllers/about.js")

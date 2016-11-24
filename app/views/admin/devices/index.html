@@ -13,6 +13,9 @@
 
             <tr class="headings">
               <td>
+                Name
+              </td>
+              <td>
                 STA
               </td>
               <td>
@@ -31,6 +34,9 @@
           </thead>
           <tbody>
             <tr ng-repeat="device in vm.devices">
+              <td>
+                {{device.deviceId}}
+              </td>
               <td>
                 {{device.sta}}
               </td>

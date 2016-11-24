@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var db = require('./lib/db');
 
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var auth = require('./lib/auth.js');
 var connect = require('connect');
@@ -27,12 +28,25 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'keyboard cat'
+  secret: 'keyboard cat',
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
 
 // use passport session
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+// some basic functions
+app.use(function(req, res, next) {
+  req.getBaseUrl = function() {
+    var hostname = req.headers.host; // hostname = 'localhost:8080'
+    return req.protocol + '://' + hostname;
+  };
+  next();
+});
 
 
 var routes = require('./lib/routes')(app);

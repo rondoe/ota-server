@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'angularMoment'
+    'angularMoment',
+    'ngclipboard',
   ])
   .config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;

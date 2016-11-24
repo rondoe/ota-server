@@ -12,7 +12,20 @@ angular.module('otaServerApp')
     var vm = this;
     vm.devices = devices.data;
   })
-  .controller('EditDeviceCtrl', function(device) {
+  .controller('EditDeviceCtrl', function(device, DeviceService) {
     var vm = this;
-    vm.device = device;
+    vm.device = device.data;
+    vm.update = update;
+
+    DeviceService.otaUrl(vm.device).success(function(res) {
+      vm.otaUrl = res.url;
+    });
+
+
+    //////////////////
+    function update() {
+      DeviceService.update(vm.device).success(function(res) {
+        vm.device = res;
+      });
+    }
   });
