@@ -18,6 +18,8 @@ angular
     'ngTouch',
     'angularMoment',
     'ngclipboard',
+    'NgSwitchery',
+    'btford.markdown',
   ])
   .config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;
@@ -31,6 +33,16 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .when('/integration', {
+        templateUrl: 'views/doc.html',
+        controller: 'DocCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          doc: function() {
+            return 'doc/integration.md';
+          }
+        }
       })
       .when('/admin/devices', {
         templateUrl: 'views/admin/devices/index.html',
