@@ -19,7 +19,7 @@ angular.module('otaServerApp')
 
     UserService.me().success(function(res) {
       $rootScope.user = res;
-    })
+    });
 
     DeviceService.my().success(function(res) {
       $rootScope.deviceCount = res.length;

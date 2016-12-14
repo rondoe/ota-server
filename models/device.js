@@ -25,6 +25,8 @@ var Device = new Schema({
   sta: String, // sta-mac
   ap: String, // ap-mac
   sdk: String,
+  type: String,
+  framework: String,
   version: String, // software version
   user: {
     type: mongoose.Schema.Types.ObjectId,

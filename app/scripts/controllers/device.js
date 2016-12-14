@@ -21,6 +21,10 @@ angular.module('otaServerApp')
       vm.otaUrl = res.url;
     });
 
+    DeviceService.dataUrl(vm.device).success(function(res) {
+      vm.dataUrl = res.url;
+    });
+
 
     //////////////////
     function update() {

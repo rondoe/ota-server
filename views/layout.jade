@@ -9,7 +9,7 @@ html(ng-app="otaServerApp")
     link(rel='stylesheet', href='/bower_components/switchery/dist/switchery.min.css')
     link(rel='stylesheet', href='/styles/main.css')
   body(class="{{bodyClass}}", ng-controller="NavigationCtrl as vm")
-    .container.body
+    .container.body(ng-if="user")
       .main_container
         .col-md-3.left_col
           .left_col.scroll-view

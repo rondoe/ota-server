@@ -29,6 +29,10 @@ angular.module('otaServerApp')
     };
 
     this.otaUrl = function(device) {
-      return $http.get('/devices/' + device._id + '/url');
+      return $http.get('/devices/' + device._id + '/downloadUrl');
+    };
+
+    this.dataUrl = function(device) {
+      return $http.get('/devices/' + device._id + '/dataUrl');
     };
   });

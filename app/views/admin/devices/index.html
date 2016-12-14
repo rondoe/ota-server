@@ -35,10 +35,10 @@
           <tbody>
             <tr ng-repeat="device in vm.devices">
               <td>
-                {{device.deviceId}}
+                <a class="btn btn-link" ng-href="#/devices/{{device._id}}/edit">{{device.deviceId}}</a>
               </td>
               <td>
-                {{device.sta}}
+                <span>{{device.sta}}</span>
               </td>
               <td>
                 <span am-time-ago="device.created"></span>
@@ -48,7 +48,7 @@
                 <span am-time-ago="device.lastCheck"></span>
               </td>
               <td>
-                {{device.sdk}}
+                <span>{{device.sdk}}</span>
               </td>
               <td>
                 <span ng-if="!device.user" class="text-muted">Unknown</span>
