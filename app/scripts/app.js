@@ -20,11 +20,12 @@ angular
     'ngclipboard',
     'NgSwitchery',
     'btford.markdown',
+    'angularFileUpload'
   ])
   .config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;
     $routeProvider
-      .when('/', {
+      .when('/dashboard', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
@@ -75,6 +76,6 @@ angular
         }
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/dashboard'
       });
   });

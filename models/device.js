@@ -39,9 +39,18 @@ var Device = new Schema({
   },
   created: Date,
   lastCheck: Date,
+  inProgress: Boolean,
+  pending: {
+    type: Boolean,
+    default: false
+  }, // software update pending, new software deployed but no rollout yet
+  lastUpdate: Date,
   versions: [{
     version: String,
-    software: Schema.Types.ObjectId,
+    software: {
+      type: Schema.Types.ObjectId,
+      ref: 'Software'
+    },
     created: {
       type: Date,
       default: new Date()

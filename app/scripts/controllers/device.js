@@ -12,10 +12,18 @@ angular.module('otaServerApp')
     var vm = this;
     vm.devices = devices.data;
   })
-  .controller('EditDeviceCtrl', function(device, DeviceService) {
+  .controller('EditDeviceCtrl', function(device, DeviceService, FileUploader) {
     var vm = this;
     vm.device = device.data;
     vm.update = update;
+    vm.uploader = new FileUploader({
+      url: 'devices/' + device._id + '/upload'
+    });
+
+
+    vm.uploader.onAfterAddingAll = function(addedFileItems) {
+      vm.uploader.uploadAll();
+    };
 
     DeviceService.otaUrl(vm.device).success(function(res) {
       vm.otaUrl = res.url;

@@ -8,6 +8,36 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
+
+        <ul class="messages">
+          <li ng-repeat="device in vm.devices" class="device-row" ng-class="{updated: (!device.pending && device.lastUpdate)}">
+            <div class="row">
+              <div class="col-md-4">
+                <h4 class="heading">{{device.deviceId}}
+                  <span class="small text-muted" ng-if="device.user">owned by {{device.user.username}}</span>
+                  <span class="small text-danger" ng-if="!device.user"><strong>Unassociated</strong></span>
+                </h4>
+                <p>
+                  <div ng-if="device.lastCheck">
+                  <span class="text-muted"></span><i class="fa fa-clock-o"></i> <span am-time-ago="device.lastCheck"></span>
+                </div>
+                <div ng-if="!device.lastCheck">
+                  <span class="text-muted">not seen</span>
+                </div>
+                </p>
+              </div>
+              <div class="col-md-3 col-md-offset-5">
+                <div clas=" one-line">
+                  <a href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="x_content">
+
+
         <table class="table table-striped">
           <thead>
 

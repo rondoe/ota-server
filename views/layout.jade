@@ -9,9 +9,9 @@ html(ng-app="otaServerApp")
     link(rel='stylesheet', href='/bower_components/switchery/dist/switchery.min.css')
     link(rel='stylesheet', href='/styles/main.css')
   body(class="{{bodyClass}}", ng-controller="NavigationCtrl as vm")
-    .container.body(ng-if="user")
+    .container.body(ng-show="user", ng-class="{hidden: !user}")
       .main_container
-        .col-md-3.left_col
+        .col-md-3.left_col.ng-cloak
           .left_col.scroll-view
             .navbar.nav_title
               a.site_title(href='/')
@@ -24,16 +24,16 @@ html(ng-app="otaServerApp")
               .menu_section.active
                 h3 Menu
                 ul.nav.side-menu
-                  li.active
-                    a(href="#/")
+                  li(ng-class="getClass('/dashboard')")
+                    a(href="#/dashboard")
                       i.fa.fa-home
                       ="Home"
-                  li(ng-show="!user.admin")
+                  li(ng-show="!user.admin", ng-class="getClass('/devices')")
                     a(href="#/devices")
                       i.fa.fa-eercast
                       ="Devices"
                       span.badge.pull-right(ng-if="deviceCount") {{deviceCount}}
-                  li(ng-show="user.admin")
+                  li(ng-show="user.admin", ng-class="getClass('/admin/devices')")
                     a(href="#/admin/devices")
                       i.fa.fa-eercast
                       ="Devices"
@@ -50,7 +50,7 @@ html(ng-app="otaServerApp")
                     a(href="/logout")
                       i.fa.fa-sign-out
                       ="Signout"
-        .top_nav
+        .top_nav.ng-cloak
           .nav_menu
             nav(role="navigation")
               .nav.toggle
@@ -61,7 +61,7 @@ html(ng-app="otaServerApp")
                   a
                     i.fa.fa-envelope
         .right_col(style="min-height: 2000px;")
-          div(ng-view="")
+          div.ng-cloak(ng-view="")
           block content
 
     script(src="/bower_components/angular/angular.min.js")
@@ -71,6 +71,7 @@ html(ng-app="otaServerApp")
     script(src="/bower_components/angular-route/angular-route.min.js")
     script(src="/bower_components/angular-sanitize/angular-sanitize.min.js")
     script(src="/bower_components/angular-touch/angular-touch.min.js")
+    script(src="/bower_components/angular-file-upload/dist/angular-file-upload.js")
     script(src="/bower_components/moment/moment.js")
     script(src="/bower_components/moment/locale/de.js")
     script(src="/bower_components/angular-moment/angular-moment.min.js")
