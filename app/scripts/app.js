@@ -20,8 +20,17 @@ angular
     'ngclipboard',
     'NgSwitchery',
     'btford.markdown',
-    'angularFileUpload'
+    'angularFileUpload',
+    'btford.socket-io'
   ])
+  .filter('contains', function() {
+    return function(array, needle) {
+      return array.indexOf(needle) >= 0;
+    };
+  })
+  .factory('mySocket', function(socketFactory) {
+    return socketFactory();
+  })
   .config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.withCredentials = true;
     $routeProvider

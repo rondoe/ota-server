@@ -1,97 +1,49 @@
-<div class="row">
-  <div class="col-md-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Devices
-          <small>unassociated</small>
+          <small>all</small>
         </h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
 
         <ul class="messages">
-          <li ng-repeat="device in vm.devices" class="device-row" ng-class="{updated: (!device.pending && device.lastUpdate)}">
+          <li ng-repeat="device in vm.devices" class="device-row ng-cloak" ng-class="{updated: (!device.pending && device.lastUpdate), pending: (device.pending && device.lastUpdate), updating: ((vm.updates | contains: device._id) || device.inProgress)}">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-4 col-sm-4 col-xs-6">
                 <h4 class="heading">{{device.deviceId}}
                   <span class="small text-muted" ng-if="device.user">owned by {{device.user.username}}</span>
                   <span class="small text-danger" ng-if="!device.user"><strong>Unassociated</strong></span>
                 </h4>
                 <p>
-                  <span ng-if="device.lastCheck" class="text-muted"></span><i class="fa fa-clock-o"></i> <span am-time-ago="device.lastCheck"></span>
+                  <span ng-if="device.lastCheck" class="text-muted"></span><i class="fa fa-eye"></i> <span am-time-ago="device.lastCheck"></span>
                   <span ng-if="!device.lastCheck" class="text-muted">not seen</span>
-                  <span  ng-if="device.updateCount>0" class="label label-warning">Update!</span>
+                  <span  ng-if="!device.inProgress && device.updateCount>0 && !(vm.updates | contains: device._id)" class="label label-warning">Reset or trigger update!</span>
                 </p>
               </div>
-              <div class="col-md-3 col-md-offset-5">
-                <div clas=" one-line">
-                  <a href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
+              <div class="col-md-4 col-sm-4">
+                <h4 class="heading">{{device.sta}}</h4>
+                <p>
+                  <span ng-if="device.lastUpdate"><i class="fa fa-cloud-download"></i> <span am-time-ago="device.lastUpdate"></span></span>
+                </p>
+              </div>
+              <div class="col-md-2 col-sm-2 hidden-xs">
+                <p>
+                  <i class="fa fa-fw fa-circle-thin"></i> {{device.type}}
+                </p>
+                <p>
+                  <i class="fa fa-fw fa-cog"></i> {{device.sdk}}
+                </p>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-12">
+                <div clas=" one-line" >
+                  <a ng-hide="(vm.updates | contains: device._id) || device.inProgress" href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
+                  <h4 ng-show="(vm.updates | contains: device._id) || device.inProgress"><i class="fa fa-circle-o-notch fa-spin"></i> Updating!</h4>
                 </div>
               </div>
             </div>
           </li>
         </ul>
       </div>
-      <div class="x_content">
 
-
-        <table class="table table-striped">
-          <thead>
-
-            <tr class="headings">
-              <td>
-                Name
-              </td>
-              <td>
-                STA
-              </td>
-              <td>
-                Created
-              </td>
-              <td>
-                Checked
-              </td>
-              <td>
-                SDK
-              </td>
-              <td>
-                Owner
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="device in vm.devices">
-              <td>
-                <a class="btn btn-link" ng-href="#/devices/{{device._id}}/edit">{{device.deviceId}}</a>
-              </td>
-              <td>
-                <span>{{device.sta}}</span>
-              </td>
-              <td>
-                <span am-time-ago="device.created"></span>
-                <div ng-if="device.created">
-                  <span ng-show="{{device.created | amDifference: null :'days'}} ===0" class="label label-warning">New</span>
-                </div>
-              </td>
-              <td>
-                <span am-time-ago="device.lastCheck"></span>
-              </td>
-              <td>
-                <span>{{device.sdk}}</span>
-              </td>
-              <td>
-                <span ng-if="!device.user" class="text-muted">Unknown</span>
-                <span>{{device.user.username}}</span>
-              </td>
-              <td>
-                <a href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
-
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
     </div>
-  </div>
-</div>
