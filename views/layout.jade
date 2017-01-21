@@ -39,13 +39,9 @@ html(ng-app="otaServerApp")
                       i.fa.fa-eercast
                       ="Devices"
                       span.badge.pull-right(ng-if="deviceCount") {{deviceCount}}
-                  li
-                    a
-                      i.fa.fa-user
-                      ="Profile"
-                  li
+                  li(ng-class="getClass('/integration')")
                     a(href="#/integration")
-                      i.fa.fa-doc
+                      i.fa.fa-file-text-o
                       ="Integration"
                   li
                     a(href="/logout")
@@ -66,6 +62,7 @@ html(ng-app="otaServerApp")
           block content
 
     script(src="/bower_components/angular/angular.min.js")
+    script(src="/bower_components/angular-bootstrap/ui-bootstrap.js")
     script(src="/bower_components/socket.io-client/dist/socket.io.min.js")
     script(src="/bower_components/angular-socket-io/socket.min.js")
     script(src="/bower_components/angular-animate/angular-animate.min.js")
@@ -84,6 +81,7 @@ html(ng-app="otaServerApp")
     script(src='/bower_components/ng-switchery/src/ng-switchery.js')
     script(src='/bower_components/showdown/compressed/Showdown.min.js')
     script(src='/bower_components/angular-markdown-directive/markdown.js')
+    script(src='/bower_components/angular-bootstrap-confirm/dist/angular-bootstrap-confirm.js')
     script(src="scripts/app.js")
     script(src="scripts/controllers/main.js")
     script(src="scripts/controllers/about.js")

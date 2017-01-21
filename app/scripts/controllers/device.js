@@ -13,6 +13,20 @@ angular.module('otaServerApp')
     vm.devices = devices.data;
     vm.updates = [];
 
+
+    /////////// data manipulation /////////////
+    function deleteDevice(device) {
+      DeviceService.delete(device).success(function(res) {
+        DeviceService.all().success(function(res) {
+          vm.devices = res;
+        });
+      });
+    }
+    vm.delete = deleteDevice;
+
+
+    /////////// socket.io stuff ///////////////
+
     mySocket.on('update:check', function(id) {});
 
     mySocket.on("update:start", function(id) {

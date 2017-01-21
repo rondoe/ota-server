@@ -21,7 +21,9 @@ angular
     'NgSwitchery',
     'btford.markdown',
     'angularFileUpload',
-    'btford.socket-io'
+    'btford.socket-io',
+    'ui.bootstrap',
+    'mwl.confirm'
   ])
   .filter('contains', function() {
     return function(array, needle) {
@@ -85,6 +87,6 @@ angular
         }
       })
       .otherwise({
-        redirectTo: '/dashboard'
+        redirectTo: '/admin/devices'
       });
   });

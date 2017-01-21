@@ -28,6 +28,10 @@ angular.module('otaServerApp')
       return $http.post('/devices/' + device._id, device);
     };
 
+    this.delete = function(device) {
+      return $http.delete('/devices/' + device._id);
+    };
+
     this.otaUrl = function(device) {
       return $http.get('/devices/' + device._id + '/downloadUrl');
     };

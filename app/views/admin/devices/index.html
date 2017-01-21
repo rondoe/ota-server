@@ -36,9 +36,16 @@
                 </p>
               </div>
               <div class="col-md-2 col-sm-2 col-xs-12">
-                <div clas=" one-line" >
-                  <a ng-hide="(vm.updates | contains: device._id) || device.inProgress" href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
+                <div clas="one-line" >
+                  <div  ng-hide="(vm.updates | contains: device._id) || device.inProgress">
+
+                  <a href="#/devices/{{device._id}}/edit" class="btn btn-primary">Edit</a>
+                  <button class="btn btn-danger" mwl-confirm title="Delete"
+  message="Do you really want to delete this device?" confirm-button-type="danger" placement="left" on-confirm="vm.delete(device)">Delete</button>
+                </div>
+
                   <h4 ng-show="(vm.updates | contains: device._id) || device.inProgress"><i class="fa fa-circle-o-notch fa-spin"></i> Updating!</h4>
+
                 </div>
               </div>
             </div>
