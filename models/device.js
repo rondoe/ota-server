@@ -3,7 +3,7 @@ var uid = require('uid');
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 var names = Moniker.generator([Moniker.adjective, Moniker.noun]);
-
+var _ = require('lodash');
 
 //instantiate mongoose-gridfs
 var gridfs = require('mongoose-gridfs')({
@@ -14,6 +14,11 @@ var gridfs = require('mongoose-gridfs')({
 //obtain a model
 var Software = gridfs.model;
 
+var schemaOptions = {
+  toJSON: {
+    virtuals: true
+  }
+};
 var Device = new Schema({
   name: String,
   // logical identifier and secret
@@ -37,7 +42,10 @@ var Device = new Schema({
     chip: Number,
     free: Number
   },
-  created: Date,
+  created: {
+    type: Date,
+    default: new Date()
+  },
   lastCheck: Date,
   inProgress: Boolean,
   pending: {
@@ -45,9 +53,8 @@ var Device = new Schema({
     default: false
   }, // software update pending, new software deployed but no rollout yet
   lastUpdate: Date,
-  versions: [{
-    version: String,
-    software: {
+  software: [{
+    file: {
       type: Schema.Types.ObjectId,
       ref: 'Software'
     },
@@ -61,13 +68,33 @@ var Device = new Schema({
     },
     downloadDate: Date
   }]
-});
+}, schemaOptions);
 
 
 Device.statics.byUser = function(id, callback) {
   return this.find({
     user: id
   }, callback);
+};
+
+Device.virtual('updateCount').get(function() {
+  return _.filter(this.software, function(s) {
+    return !s.downloaded;
+  }).length;
+});
+
+// cb(err, software) null if no software
+Device.methods.nextSoftware = function(cb) {
+  var res = _.filter(_.orderBy(this.software, ['created'], ['asc']), function(s) {
+    return !s.downloaded;
+  });
+  // return first software to update
+  if (res.length > 0) {
+    cb(null, res[0]);
+  } else {
+
+    cb(null, null);
+  }
 };
 
 Device.pre('save', function(next) {

@@ -18,12 +18,9 @@
                   <span class="small text-danger" ng-if="!device.user"><strong>Unassociated</strong></span>
                 </h4>
                 <p>
-                  <div ng-if="device.lastCheck">
-                  <span class="text-muted"></span><i class="fa fa-clock-o"></i> <span am-time-ago="device.lastCheck"></span>
-                </div>
-                <div ng-if="!device.lastCheck">
-                  <span class="text-muted">not seen</span>
-                </div>
+                  <span ng-if="device.lastCheck" class="text-muted"></span><i class="fa fa-clock-o"></i> <span am-time-ago="device.lastCheck"></span>
+                  <span ng-if="!device.lastCheck" class="text-muted">not seen</span>
+                  <span  ng-if="device.updateCount>0" class="label label-warning">Update!</span>
                 </p>
               </div>
               <div class="col-md-3 col-md-offset-5">
@@ -72,7 +69,9 @@
               </td>
               <td>
                 <span am-time-ago="device.created"></span>
-                <span ng-show="{{device.created | amDifference: null :'days'}} ===0" class="label label-warning">New</span>
+                <div ng-if="device.created">
+                  <span ng-show="{{device.created | amDifference: null :'days'}} ===0" class="label label-warning">New</span>
+                </div>
               </td>
               <td>
                 <span am-time-ago="device.lastCheck"></span>

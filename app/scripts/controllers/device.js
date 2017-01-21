@@ -17,7 +17,7 @@ angular.module('otaServerApp')
     vm.device = device.data;
     vm.update = update;
     vm.uploader = new FileUploader({
-      url: 'devices/' + device._id + '/upload'
+      url: 'devices/' + vm.device._id + '/upload'
     });
 
 

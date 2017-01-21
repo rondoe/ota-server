@@ -17,6 +17,7 @@
     "express-session": "^1.14.2",
     "gridfs-stream": "^1.1.1",
     "jade": "~1.11.0",
+    "lodash": "^4.17.4",
     "log4js": "^1.0.1",
     "mongoose": "^4.6.8",
     "mongoose-gridfs": "^0.1.0",

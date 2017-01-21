@@ -6,7 +6,12 @@
       <div class="col-md-12">
         <div class="x_panel">
           <div class="x_title">
-            <h3>Device</h3>
+            <div class="alert alert-warning" ng-if="vm.device.updateCount>0">
+              An update is available. Please force your device to check for updates.
+            </div>
+            <h3>Device
+            </h3>
+
             <input type="file" nv-file-select uploader="vm.uploader"/><br/>
           </div>
           <div class="x_content">
@@ -20,7 +25,7 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-3">MAC</label>
                 <div class="col-md-6 col-sm-6 col-xs-9">
-                  <input type="text" class="form-control" ng-model="vm.device.sta"/>
+                  <input type="text" class="form-control" ng-model="vm.device.sta" ng-disabled="true"/>
                 </div>
               </div>
               <div class="form-group">

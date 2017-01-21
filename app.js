@@ -13,8 +13,11 @@ var passport = require('passport');
 var auth = require('./lib/auth.js');
 var connect = require('connect');
 var app = express();
+var socket_io = require("socket.io");
 
-
+// Socket.io
+var io = socket_io();
+app.io = io;
 
 // view engine setup
 app.set('view engine', 'jade');
