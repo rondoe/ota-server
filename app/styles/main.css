@@ -34,3 +34,7 @@ body.nav-sm #sidebar-menu .badge {
   vertical-align: middle;
   height: auto;
 }
+
+.btn-default {
+  background-color: #efefef;
+}

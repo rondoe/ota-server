@@ -6,7 +6,17 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
+        <div class="visible-md visible-lg">
 
+        Use <strong><i>{{user.downloadUrl}}</i></strong><button class="btn btn-default btn-xs"  ngclipboard data-clipboard-text="{{user.downloadUrl}}"><i class="fa fa-copy"></i></button>
+                              in your esp code for requesting http updates. See the integration section for a simple sample.
+
+                            </div>
+                            <div class=" visible-sm visible-xs">
+                              Click here <button class="btn btn-default btn-xs"  ngclipboard data-clipboard-text="{{user.downloadUrl}}"><i class="fa fa-copy"></i></button> to copy the download url.
+                            </div>
+      </div>
+      <div class="x_content">
         <ul class="messages">
           <li ng-repeat="device in vm.devices" class="device-row ng-cloak" ng-class="{updated: (!device.pending && device.lastUpdate), pending: (device.pending && device.lastUpdate), updating: ((vm.updates | contains: device._id) || device.inProgress)}">
             <div class="row">

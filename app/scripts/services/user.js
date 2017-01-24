@@ -12,5 +12,5 @@ angular.module('otaServerApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.me = function() {
       return $http.get('/me');
-    }
+    };
   });
