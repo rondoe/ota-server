@@ -1,6 +1,6 @@
-# OTA SERVER
+# UPTHROW
 
-This project manages http updates for esp8266 modules with a simple ui.
+This project manages http updates for esp8266 modules through a simple ui.
 
 ## Getting started
 
@@ -31,18 +31,21 @@ This product uses the following environment variables.
 Build the docker image
 
 ```
-docker build -t youruser/ota .
+docker build -t youruser/upthrow .
 ```
 
-Run the image
+Running
 
 ```
-docker run -d --name ota-server -p 80:3000 -e MONGO_URL=mongodb://db/ota youruser/ota
+docker run -d --name upthrow -p 80:3000 -e MONGO_URL=mongodb://db/ota mahrer/upthrow
 ```
 
 ## Usage
 
-login with admin/admin
+- login with admin/admin
+- use the skeleton on your esp device with the displayed download url
+- upload new software
+- restart your esp device
 
 ## License
 
