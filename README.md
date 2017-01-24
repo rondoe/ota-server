@@ -44,4 +44,12 @@ docker run -d --name ota-server -p 80:3000 -e MONGO_URL=mongodb://db/ota youruse
 
 login with admin/admin
 
-Made with love in absdorf, austria
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgements
+
+- <https://github.com/puikinsh/gentelella>
+
+Made with love in Absdorf, Austria

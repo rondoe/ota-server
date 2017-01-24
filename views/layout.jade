@@ -57,10 +57,15 @@ html(ng-app="otaServerApp")
                 li
                   a
                     i.fa.fa-envelope
-        .right_col(style="min-height: 2000px;")
+        .right_col(style="min-height: 1000px;")
           div.ng-cloak(ng-view="")
           block content
-
+      footer
+        .pull-right
+          ="Made with "
+          span.glyphicon.glyphicon-heart
+          =" in Absdorf, Austria"
+        .clearfix
     script(src="/bower_components/angular/angular.min.js")
     script(src="/bower_components/angular-bootstrap/ui-bootstrap.js")
     script(src="/bower_components/socket.io-client/dist/socket.io.min.js")
