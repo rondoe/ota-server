@@ -8,7 +8,8 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY . /usr/src/app
-RUN npm install -g npm bower nodemon
+RUN npm install -g npm bower
+RUN npm install -g nodemon
 RUN npm install && bower install --allow-root
 
 ENV MONGO_URL mongodb://db/ota
