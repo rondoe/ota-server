@@ -31,13 +31,13 @@ This product uses the following environment variables.
 Build the docker image
 
 ```
-docker build -t youruser/upthrow .
+docker build -t rondoe/upthrow .
 ```
 
 Running
 
 ```
-docker run -d --name upthrow -p 80:3000 -e MONGO_URL=mongodb://db/ota mahrer/upthrow
+docker run -d --name upthrow -p 80:3000 -e MONGO_URL=mongodb://db/ota rondoe/upthrow
 ```
 
 ## Usage
