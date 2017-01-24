@@ -2,15 +2,15 @@
   "name": "ota-server",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.4.0",
+    "angular": "~1.5.0",
     "bootstrap": "^3.2.0",
-    "angular-animate": "^1.4.0",
-    "angular-cookies": "^1.4.0",
-    "angular-messages": "^1.4.0",
-    "angular-resource": "^1.4.0",
-    "angular-route": "^1.4.0",
-    "angular-sanitize": "^1.4.0",
-    "angular-touch": "^1.4.0",
+    "angular-animate": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-messages": "~1.5.0",
+    "angular-resource": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
+    "angular-touch": "~1.5.0",
     "gentelella": "^1.3.0",
     "animate.css": "^3.5.2",
     "font-awesome": "^4.7.0",
@@ -26,7 +26,7 @@
     "angular-bootstrap": "^2.4.0"
   },
   "devDependencies": {
-    "angular-mocks": "^1.4.0"
+    "angular-mocks": "~1.5.0"
   },
   "appPath": "app",
   "moduleName": "otaServerApp",
@@ -40,6 +40,7 @@
     }
   },
   "resolutions": {
-    "switchery": "^0.8.2"
+    "switchery": "^0.8.2",
+    "angular": "1.5.11"
   }
 }
