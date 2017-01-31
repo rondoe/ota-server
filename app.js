@@ -22,6 +22,8 @@ app.io = io;
 
 // view engine setup
 app.set('view engine', 'jade');
+// trust proxies to enable ssl termination
+app.enable('trust proxy');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
