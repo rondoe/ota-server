@@ -49,7 +49,11 @@ app.use(passport.session());
 app.use(function(req, res, next) {
   req.getBaseUrl = function() {
     var hostname = req.headers.host; // hostname = 'localhost:8080'
-    return req.protocol + '://' + hostname;
+    if (req.secure) {
+      return 'https://' + hostname;
+    } else {
+      return req.protocol + '://' + hostname;
+    }
   };
   next();
 });
