@@ -11,7 +11,14 @@ env:
   - secure: YMK6fk4Q9ZLZJwO6iXsay4Gxtu38wx2p6zB4K0MhuP+z9MObSt6xPF663LLbwQccCgE7k3y37TmaVj/ygxk2l4KkTsXDH/pesGuz/kgZy9L/+Ntev3v8UDnGfYhclpHjcCkU+HBnQsIlMaY26DiVi140Bbg6X/sklWnrWDQ/3aBvm9Sj2+KLeL+VKZNWlJKF+uhtk2wm9/W1Bavm/lXSHvazDGze+XoO8kFr6SoTHq68vFXnWETh6qjPexDN8zxpxoCvv4fQ2k4PIR29nibZ01J55iK9TZLmoJ48BBRybEms/Fcog36bwOK0GEsF8+ZyN+pnPTkNTDBksDFXPhwEadYkM3JFpBMWlfCDE0+8umvYpXevQjC2RLn6zcRDbT+9SEOA+ken61zUHoctD3WGvJ72fnPPe0cxMm6EQQiAxKZnY6kPu6RixOnDu3rDcCgg5tP6UNoUfu3LgzXBmSSR4ZFnE31+DDjInIedqMLIB6cJW9YICA14LmNeNLxZS4sS05uSJG9pIaDnoUPqtAhatKG2IKG8xqmC/CwNslzbRbloAGC7eIzVZoBZTEGPcwAx3Gls9ZMyVV6Cf+T5DcT2oNXXumZDwYCJH+YUwijZk8+h3w9u4K63r08XPdD3W6yA5FUdTJwVj10lrd/yiPovl620xHNJhOIlbJpp9lASiCA=
   - COMMIT=${TRAVIS_COMMIT::8}
 
+install:
+  - echo "nothing to install!"
+
+scripts:
+  - echo "nothing to test!"
+
 after_success:
+  - docker --version
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=rondoe/upthrow
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
