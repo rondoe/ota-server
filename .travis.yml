@@ -1,0 +1,21 @@
+sudo: required
+language: ruby
+services:
+- docker
+
+# https://sebest.github.io/post/using-travis-ci-to-build-docker-images/
+env:
+  global:
+  - secure: YucPONsb1Xe7GSxWTTKBRfrcGAvhm07Yc5Ok9zG9qBav6BStjybztgQvGo2sjzbowiAlQAsTqIe/AJxYqsRrHzEI7ulwoMQl7ZAUSc/vOIE2wFmse6o7xXg6CH+w0T97mK01vl0aBlpxAQzxIRL0gPYj29tHOnYF0f5yMGTCUf8vffW5Q5++kp3urk86FjRm5wLG5pBO4+W+OPl5DY8c0Quzeb/Gu8Qtbvu6vYCbbd16J+7lvakDKXzeL+gGPAXKKKxlBXq1zaM7ngcJnEWoCUisUGNNMmZdc9Tj7wq0qXcXAq7FC4GfdpL5Cqdaz4HCvZwfUCexilxSUQn87RGVy/BRlAz2eUr5ln9Nu31SsysVG9oiblMcg/M2vjBrOu3a/rF6c+y6WadNXdeTPLag5fo443mHV1wYw1dNnHeVrxL0k9A40dRNyxZEXbkPu3JKNIFRzXfqplrdpAMU8gFD5V/h/3mhF/uMuUIhhKWfEPTkzR+RxXjLX+L0VZC3nsWfSbp57dPWucP7VqPwLUVBtQ3yVM+TMRo1q6uaroToAk5dP8dQfxdHUQLVxGKByqH5mYJWomDCWcBxW+JxaSysyYMfx2KRKj6JBGlsF3UmoDqvA8SWP8Fj9EEqFj7IclsbxkK6Fh4xA+UNIxTY3+EAZNdUUqKlgEmEKvbu8zfP2BY=
+  - secure: UUIaY0Kb0AnjaAKn0e9jcYd9HNcjqIHAsrroIAuusj+mFaaPCUf9G+UGQ6UrNug2Gd8WhTD2AGqfLJNHa5EuOw8ylbX2yvRGNpAXdhlTa/PG0qHzODM/hNnIoTXH3Ko+n+V9jSVmt6sO14sYiadFdRm9SpQOOaz7Oa02lH2sMuR9GAyqdcY4LAVmj2/owX7mGu/yztjyHjSbnhl4a/8eckSM4eNuG/rAC239vhjhq0UDtlt7kMHpAztuA1dXJz9dDbq13bbHzOqiIQsAM50moTmqnB52sMybSCvgrExvXK5LotSx2QzX2DFL7N8ejTa3kX5DL7asvfiT/xhJNHC2jdsvoBtboyvItgCNZoZDmiZPx2AZeVYh6d8JqotD5mrBkzEaKY55CMR0A2Y39gkzgjik6RxpWsJ6SzUYag4h3KfX2q7UE2WhEzyhQcfB4B0RhbByeLHru/r2Ti2b3Tqk2Xvehp0ON0PTueHLsSexRAq43qkEdI/hirCxKwwqDiTWB20S0b4+CsbvxoljFXt3ELrSwaoOdk1Yw8dGxayuJrwFyOUA0tyGJ+Md14npk+kTtukYhCwdGoFDnaNoQixmbKA2zt4C6CX09F+L7sokwLkCrjr/nue4uhjfUF1JoucyxVwOZwcSQlKQmTaN4+KwdPcAaRvo2NBlp8LckPctrfk=
+  - secure: YMK6fk4Q9ZLZJwO6iXsay4Gxtu38wx2p6zB4K0MhuP+z9MObSt6xPF663LLbwQccCgE7k3y37TmaVj/ygxk2l4KkTsXDH/pesGuz/kgZy9L/+Ntev3v8UDnGfYhclpHjcCkU+HBnQsIlMaY26DiVi140Bbg6X/sklWnrWDQ/3aBvm9Sj2+KLeL+VKZNWlJKF+uhtk2wm9/W1Bavm/lXSHvazDGze+XoO8kFr6SoTHq68vFXnWETh6qjPexDN8zxpxoCvv4fQ2k4PIR29nibZ01J55iK9TZLmoJ48BBRybEms/Fcog36bwOK0GEsF8+ZyN+pnPTkNTDBksDFXPhwEadYkM3JFpBMWlfCDE0+8umvYpXevQjC2RLn6zcRDbT+9SEOA+ken61zUHoctD3WGvJ72fnPPe0cxMm6EQQiAxKZnY6kPu6RixOnDu3rDcCgg5tP6UNoUfu3LgzXBmSSR4ZFnE31+DDjInIedqMLIB6cJW9YICA14LmNeNLxZS4sS05uSJG9pIaDnoUPqtAhatKG2IKG8xqmC/CwNslzbRbloAGC7eIzVZoBZTEGPcwAx3Gls9ZMyVV6Cf+T5DcT2oNXXumZDwYCJH+YUwijZk8+h3w9u4K63r08XPdD3W6yA5FUdTJwVj10lrd/yiPovl620xHNJhOIlbJpp9lASiCA=
+  - COMMIT=${TRAVIS_COMMIT::8}
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=rondoe/upthrow
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
